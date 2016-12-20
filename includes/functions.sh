@@ -289,13 +289,13 @@ DEBIAN_FRONTEND=noninteractive ${APT} -y install dovecot-common dovecot-core dov
 			;;
 		ssl_le)
 			curled_ip="$(curl -4s ifconfig.co)"
-			for ip in $(dig ${sys_hostname}.${sys_domain} a +short)
+			for ip in $(dig @8.8.8.8 ${sys_hostname}.${sys_domain} a +short)
 			do
 				if [[ "${ip}" == "${curled_ip}" ]]; then
 					ip_fqdn_useable=1
 				fi
 			done
-			for ip in $(dig autodiscover.${sys_domain} a +short)
+			for ip in $(dig @8.8.8.8 autodiscover.${sys_domain} a +short)
 			do
 				if [[ "${ip}" == "${curled_ip}" ]]; then
 					ip_as_useable=1
